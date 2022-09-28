@@ -1,0 +1,87 @@
+[# if options.paper_size == "usletter" #]
+\documentclass[[# if options.nocompress #]nocompress[# endif #]]{spie}  %>>> use for US letter paper
+[# else #]
+\documentclass[[-options.paper_size-][# if options.nocompress #], nocompress[# endif #]]{spie}  %>>> use for US letter paper
+[# endif #]
+%% \documentclass[a4paper]{spie}  %>>> use this instead for A4 paper
+%% \documentclass[nocompress]{spie}  %>>> to avoid compression of citations
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage[numbers]{natbib}
+
+[-IMPORTS-]
+
+[# if options.double_spacing #]
+\renewcommand{\baselinestretch}{1.65}
+[# else #]
+% Change to 1.65 for double spacing
+\renewcommand{\baselinestretch}{1.0}
+[# endif #]
+
+\title{[-doc.title-]}
+
+[# for author in doc.authors #]
+\author[[-author.letter|lower-]]{[-author.name-]}
+[# endfor #]
+[# for author in doc.authors #]
+\affil[[-author.letter|lower-]]{[-author.affiliations|join(", ", "value")-]}
+[# endfor #]
+
+% \authorinfo{Further author information: your@emaildomain.com}
+[# for author in doc.authors #]
+[# if author.corresponding #]
+\authorinfo{Further author information: [-author.email-]}
+[# endif #]
+[# endfor #]
+
+% Option to view page numbers
+[# if options.page_numbers #]
+% \pagestyle{empty} to hide page numbers
+\pagestyle{plain}
+[# else #]
+% \pagestyle{plain} to show page numbers
+\pagestyle{empty}
+[# endif #]
+[# if options.start_page #]
+\setcounter{page}{[-options.start_page-]}
+[# else #]
+% \setcounter{page}{301}
+[# endif #]
+
+\begin{document}
+\maketitle
+
+[# if parts.abstract #]
+\begin{abstract}
+[-parts.abstract-]
+\end{abstract}
+[# endif #]
+
+% Include a list of keywords after the abstract
+\keywords{[-doc.keywords|join(", ")-]}
+
+
+[-CONTENT-]
+
+
+% Include appendix
+[# if parts.appendix #]
+\apendix
+[-parts.appendix-]
+[# endif #]
+
+[# if parts.acknowledgments or options.link #]
+\acknowledgments
+[# if parts.acknowledgments #][-parts.acknowledgments-][# endif #]
+[# if options.link #]View this paper at \href{[-options.link-]}{[-options.link-]}[# endif #]
+[# endif #]
+
+% References
+[# if doc.bibliography #]
+\bibliography{[- doc.bibliography | join(", ") -]}
+\bibliographystyle{spiebib} % makes bibtex use spiebib.bst
+[# endif #]
+
+\end{document}

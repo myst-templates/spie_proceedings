@@ -1,0 +1,91 @@
+jtex: v1
+title: SPIE Proceedings
+description: >-
+  A template using the styles provided by the SPIE for publications in their
+  proceedings
+authors:
+  - name: SPIE
+    website: https://www.spie.org/
+    affiliations:
+      - SPIE
+version: 3.40.1
+license: CC-BY-4.0
+thumbnail: ./thumbnail.png
+tags:
+  - paper
+  - proceedings
+source: https://spie.org/Documents/Publications/spie-proceedings-style.zip
+style:
+  citation: numerical-only
+parts:
+  - id: abstract
+    required: true
+    description: >
+      An abstract is a short summary of your research paper or report. A good
+      abstract will prepare readers for
+
+      the detailed information to follow, communicate the essence of the article
+      and help readers take away and
+
+      remember key points.
+  - id: appendix
+    description: >-
+      Include one of more blocks in the appendix section, rendered after the
+      main body of the article but before the bibliography.
+  - id: acknowledgments
+    description: >
+      This unnumbered section is used to identify those who have aided the
+      authors in understanding or accomplishing the work presented and to
+      acknowledge sources of funding.
+doc:
+  - id: title
+    required: true
+  - id: authors
+    required: true
+  - id: keywords
+    description: |
+      Include a list of keywords after the abstract (minimum 3)
+  - id: bibliography
+options:
+  - id: paper_size
+    type: choice
+    description: Set the paper size for the document
+    default: usletter
+    choices:
+      - usletter
+      - a4paper
+  - id: double_spacing
+    title: Double line spacing
+    type: boolean
+    description: Enable double line spacing
+    default: false
+  - id: page_numbers
+    type: boolean
+    description: Enable page numbers
+    default: false
+  - id: nocompress
+    type: boolean
+    description: Avoid compression of citations
+    default: true
+  - id: start_page
+    type: string
+    description: Set the starting page number, only used when page numbers are enabled
+    default: '1'
+  - id: link
+    type: string
+    description: Link to online article
+files:
+  - template.tex
+  - spie.cls
+  - spiebib.bst
+  - mcr3b.eps
+packages:
+  - amsfonts
+  - amsmath
+  - amssymb
+  - authblk
+  - cite
+  - graphicx
+  - hyperref
+  - ifthen
+  - natbib
