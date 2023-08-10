@@ -26,7 +26,10 @@
 \author[[-author.letter|lower-]]{[-author.name-]}
 [# endfor #]
 [# for author in doc.authors #]
-\affil[[-author.letter|lower-]]{[-author.affiliations|join(", ", "value")-]}
+\affil[[-author.letter|lower-]]{
+[#- for affiliation in author.affiliations #]
+[-affiliation.value.name-][# if not loop.last #], [# endif #]
+[# endfor #]}
 [# endfor #]
 
 % \authorinfo{Further author information: your@emaildomain.com}
