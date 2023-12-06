@@ -63,7 +63,12 @@
 [# endif #]
 
 % Include a list of keywords after the abstract
+[# if doc.keywords #]
 \keywords{[-doc.keywords|join(", ")-]}
+[# else #]
+\keywords{}
+[# endif #]
+
 
 
 [-CONTENT-]
